@@ -1,0 +1,80 @@
+package com.api.lab.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.api.lab.models.Turma;
+import com.api.lab.repository.TurmaRepositorio;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@RestController
+@RequestMapping("/turma")
+public class TurmaController {
+	@Autowired
+	private TurmaRepositorio turmaRepositorio;
+	
+	@GetMapping
+	public List<Turma> listar() {
+		return turmaRepositorio.findAll();
+	}
+	
+	@GetMapping ("/{turmaID}")
+	public ResponseEntity<Turma> buscar (@PathVariable Long turmaID) {	
+		Optional<Turma> turma= turmaRepositorio.findById(turmaID);
+		
+		if (turma.isPresent() ) {
+			return ResponseEntity.ok(turma.get());
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	public Turma adicionar(@RequestBody Turma turma) {
+		return turmaRepositorio.save(turma);
+	}
+	
+	@PutMapping("/{turmaID}")
+	public ResponseEntity<Turma> atualizar(@PathVariable Long turmaID,
+			@RequestBody Turma turma) {
+		if (!turmaRepositorio.existsById(turmaID)) {
+			return ResponseEntity.notFound().build();
+		}
+		
+			turma.setCod_turma(turmaID);
+			turma=turmaRepositorio.save(turma);
+			
+			return ResponseEntity.ok(turma);
+					
+				
+	}
+	
+	
+	@DeleteMapping("/{turmaID}")
+	public ResponseEntity<Void> remover(@PathVariable Long turmaID){
+		if (!turmaRepositorio.existsById(turmaID)) {
+			return ResponseEntity.notFound().build();
+	}
+	turmaRepositorio.deleteById(turmaID);
+	
+	return ResponseEntity.noContent().build();
+	
+	}
+	
+	
+}

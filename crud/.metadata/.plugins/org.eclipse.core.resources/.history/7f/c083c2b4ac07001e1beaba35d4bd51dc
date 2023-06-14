@@ -1,0 +1,25 @@
+package com.api.lab.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+import com.api.lab.models.Turma;
+import com.api.lab.repository.TurmaRepositorio;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@RestController
+public class TurmaController {
+	@Autowired
+	private TurmaRepositorio turmaRepositorio;
+	
+	@GetMapping("/Turma")
+	public List<Turma> listar() {
+		return turmaRepositorio.findAll();
+	}
+}

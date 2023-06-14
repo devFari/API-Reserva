@@ -1,0 +1,28 @@
+package com.api.lab.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.api.lab.models.Professor;
+
+
+import com.api.lab.repository.ProfessorRepositorio;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@RestController
+public class ProfessorController {
+	
+	@Autowired
+	private ProfessorRepositorio professorRepositorio;
+	
+	@GetMapping("/Professor")
+	public List<Professor> Listar () {
+			return professorRepositorio.findAll();
+	}
+
+}

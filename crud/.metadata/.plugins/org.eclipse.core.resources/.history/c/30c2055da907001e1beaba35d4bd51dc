@@ -1,0 +1,59 @@
+package com.api.lab.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.api.lab.models.Laboratorio;
+
+import com.api.lab.repository.LaboratorioRepository;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@RestController
+@RequestMapping("/laboratorio")
+public class LabController {
+	
+	@Autowired
+	private LaboratorioRepository laboratorioRepostory;
+	
+	@GetMapping
+	public List<Laboratorio> Listar () {
+			return laboratorioRepostory.findAll();
+	}
+	
+@GetMapping ("/{laboratorioID}")
+public ResponseEntity<Laboratorio> buscar (@PathVariable Long laboratorioID) {	
+	Optional<Laboratorio> laboratorio= laboratorioRepostory.findById(laboratorioID);
+	
+	if (laboratorio.isPresent() ) {
+		return ResponseEntity.ok(laboratorio.get());
+	}
+	
+	return ResponseEntity.notFound().build();
+}
+@PostMapping
+@ReSponseStatus(HttpStatus.CREATED)
+public Laboratorio adicionar(@RequestBody Laboratorio laboratorio) {
+	return laboratorioRepostory.save(laboratorio);
+}
+
+
+//public @ResponseBody Laboratorio cadastrar(@RequestBody Laboratorio laboratorio ) {
+	//return  
+}
+
+
+
+
+	

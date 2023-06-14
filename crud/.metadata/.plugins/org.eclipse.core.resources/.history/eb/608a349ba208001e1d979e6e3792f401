@@ -1,0 +1,12 @@
+package com.api.lab.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.api.lab.models.Reserva;
+
+public interface ReservaRepository extends JpaRepository<Reserva, Long> {
+	List<Reserva> findByNome(String nome);
+	List<Reserva> findByNomeContaining(String nome);
+}

@@ -1,0 +1,40 @@
+package com.api.lab.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.api.lab.models.Reserva;
+import com.api.lab.repository.ReservaRepository;
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@RestController
+@RequestMapping
+public class ReservaController {
+	@Autowired
+	private ReservaRepository reservaRepostory;
+	
+	@GetMapping
+	public List<Reserva> Listar () {
+			return reservaRepostory.findAll();
+	}
+	
+@GetMapping ("/{reservaID}")
+public ResponseEntity<Reserva> buscar (@PathVariable Long reservaID) {	
+	Optional<Reserva> reserva= reservaRepostory.findById(reservaID);
+	
+	if (reserva.isPresent() ) {
+		return ResponseEntity.ok(reserva.get());
+	}
+	
+	return ResponseEntity.notFound().build();
+}
+
+}

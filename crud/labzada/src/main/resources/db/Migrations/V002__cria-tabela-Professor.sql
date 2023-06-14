@@ -1,0 +1,4 @@
+CREATE TABLE Professor (
+  matricula INT NOT NULL PRIMARY KEY,
+  nome VARCHAR(255) NOT NULL
+);

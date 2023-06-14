@@ -1,0 +1,47 @@
+package com.api.lab.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.api.lab.models.Laboratorio;
+
+import com.api.lab.repository.LaboratorioRepository;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@RestController
+public class LabController {
+	
+	@Autowired
+	private LaboratorioRepository laboratorioRepostory;
+	
+	@GetMapping("/laboratorio")
+	public List<Laboratorio> Listar () {
+			return laboratorioRepostory.findAll();
+	}
+	
+@GetMapping ("/laboratorio/{laboratorioID}")
+public Laboratorio buscar (@PathVariable Long laboratorioID) {	
+	Optional<Laboratorio> laboratorio= laboratorioRepostory.findById();
+	return laboratorio.orElse(null);
+}
+			
+}
+
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	

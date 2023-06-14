@@ -1,0 +1,19 @@
+1685676373768	Delete element
+1685676608324	Rename package 'com.api.lab.laboratorio'
+1685679769417	Rename type 'Repository'
+1685680082405	Rename type 'Controller'
+1685680373708	Delete element
+1685680565354	Rename resource 'V001__cria-tabela-Laboratorio.sql'
+1685685779042	Rename field 'idturma'
+1685686930959	Rename resource 'V002__cria-tabela-Reserva'
+1685688391394	Rename field 'day'
+1685689520032	Rename type 'ProfessorRepositorio'
+1685690761386	Rename type 'ReservaController'
+1685690783205	Rename type 'ReservaRepositorio'
+1685691210027	Rename resource 'V002__cria-tabela-Reserva.sql'
+1685691372826	Delete element
+1685692730984	Rename resource 'V002__cria-tabela-Professor'
+1685693784029	Rename type 'TurmaRepositorio'
+1685694474187	Delete element
+1685695193611	Delete element
+1685695396424	Rename field 'curso'
